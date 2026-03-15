@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>신앙 질문 교사 가이드 | 개혁주의 변증 핸드북</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #1a2e4a;
+  --navy-mid:   #243855;
+  --navy-light: #2d4a6e;
+  --gold:       #c8922a;
+  --gold-light: #e8b84b;
+  --gold-pale:  #fff8e8;
+  --cream:      #faf6ef;
+  --cream-dark: #ede5d8;
+  --teal:       #1e6b5e;
+  --teal-light: #e4f2ef;
+  --red:        #8b2020;
+  --red-light:  #fdf0f0;
+  --blue-soft:  #e8eef8;
+  --blue-mid:   #2040a0;
+  --purple-soft:#f3e8f8;
+  --text:       #1e1e2e;
+  --text-soft:  #5a5a72;
+  --border:     #ddd5c8;
+  --white:      #ffffff;
+  --shadow-sm:  0 2px 8px rgba(26,46,74,0.08);
+  --shadow-md:  0 4px 20px rgba(26,46,74,0.12);
+  --shadow-lg:  0 8px 40px rgba(26,46,74,0.18);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ─── HEADER ─── */
+.site-header {
+  background: var(--navy);
+  position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+}
+.header-top {
+  max-width: 1200px; margin: 0 auto;
+  padding: 14px 24px;
+  display: flex; align-items: center; gap: 16px;
+  flex-wrap: wrap;
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.brand-cross {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: var(--navy);
+  font-weight: 900; flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(200,146,42,0.4);
+}
+.brand-text h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--white); line-height: 1.2;
+}
+.brand-text p {
+  font-size: 11px; color: rgba(255,255,255,0.5);
+  font-weight: 300; margin-top: 1px;
+}
+.header-search {
+  flex: 1; min-width: 200px; max-width: 380px;
+  position: relative;
+}
+.header-search input {
+  width: 100%; padding: 9px 16px 9px 40px;
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 24px; color: var(--white);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px; outline: none;
+  transition: all 0.2s;
+}
+.header-search input::placeholder { color: rgba(255,255,255,0.35); }
+.header-search input:focus { background: rgba(255,255,255,0.15); border-color: var(--gold-light); }
+.search-ico {
+  position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+  color: rgba(255,255,255,0.4); font-size: 15px; pointer-events: none;
+}
+.header-actions { display: flex; gap: 8px; margin-left: auto; }
+.btn-pill {
+  padding: 8px 14px; border-radius: 20px; border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.75);
+  font-size: 12px; font-weight: 500; cursor: pointer; white-space: nowrap;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: all 0.2s; display: flex; align-items: center; gap: 5px;
+}
+.btn-pill:hover { background: rgba(255,255,255,0.15); color: var(--white); }
+.btn-pill.active { background: rgba(200,146,42,0.25); border-color: var(--gold); color: var(--gold-light); }
+
+/* ─── CATEGORY NAV ─── */
+.cat-nav {
+  background: var(--navy-mid);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.cat-nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 20px;
+  display: flex; gap: 0; overflow-x: auto; scrollbar-width: none;
+}
+.cat-nav-inner::-webkit-scrollbar { display: none; }
+.cat-btn {
+  padding: 11px 16px; background: none; border: none;
+  border-bottom: 2.5px solid transparent;
+  color: rgba(255,255,255,0.5); font-size: 12.5px; font-weight: 500;
+  cursor: pointer; white-space: nowrap;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: all 0.2s;
+}
+.cat-btn:hover { color: rgba(255,255,255,0.85); }
+.cat-btn.active { color: var(--gold-light); border-bottom-color: var(--gold-light); font-weight: 700; }
+
+/* ─── LAYOUT ─── */
+.app-layout {
+  max-width: 1200px; margin: 0 auto;
+  padding: 20px 16px;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .app-layout { grid-template-columns: 1fr; }
+}
+
+/* ─── QUESTION LIST ─── */
+.q-panel {}
+.q-meta {
+  font-size: 12px; color: var(--text-soft);
+  margin-bottom: 10px; padding: 0 2px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.q-list { display: flex; flex-direction: column; gap: 7px; }
+
+.q-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 14px 13px 13px;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 0 8px;
+  position: relative;
+}
+.q-card:hover {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+.q-card.active {
+  border-color: var(--navy);
+  background: #f2f6ff;
+  box-shadow: var(--shadow-lg);
+}
+.q-num {
+  grid-row: 1/3; grid-column: 1;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--cream-dark); color: var(--navy);
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  align-self: start; margin-top: 1px; flex-shrink: 0;
+}
+.q-card.active .q-num { background: var(--navy); color: var(--white); }
+.q-text {
+  grid-column: 2; grid-row: 1;
+  font-size: 13.5px; font-weight: 500; line-height: 1.5;
+  color: var(--text);
+}
+.q-bottom {
+  grid-column: 2; grid-row: 2;
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 5px;
+}
+.q-tag {
+  font-size: 10px; font-weight: 600;
+  padding: 2px 8px; border-radius: 10px;
+}
+.q-fav-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 14px; opacity: 0.3; transition: opacity 0.2s;
+  grid-column: 3; grid-row: 1/3;
+  align-self: center; padding: 4px;
+}
+.q-fav-btn:hover, .q-fav-btn.on { opacity: 1; }
+
+/* tag colors */
+.tag-creation  { background: #e6f4e6; color: #1e6b1e; }
+.tag-salvation { background: var(--blue-soft); color: var(--blue-mid); }
+.tag-god       { background: #fff3e0; color: #8a5000; }
+.tag-bible     { background: var(--purple-soft); color: #601a80; }
+.tag-suffering { background: var(--red-light); color: var(--red); }
+.tag-church    { background: var(--teal-light); color: var(--teal); }
+.tag-religion  { background: #fef3e8; color: #7a4010; }
+
+/* ─── DETAIL PANEL ─── */
+.detail-panel {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  position: sticky; top: 100px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+.detail-panel::-webkit-scrollbar { width: 4px; }
+.detail-panel::-webkit-scrollbar-thumb { background: var(--cream-dark); border-radius: 4px; }
+
+.detail-empty {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  min-height: 400px; gap: 14px;
+  color: var(--cream-dark); text-align: center; padding: 40px;
+}
+.detail-empty .big-cross {
+  font-size: 56px; line-height: 1;
+  font-family: 'Noto Serif KR', serif;
+  color: var(--cream-dark);
+}
+.detail-empty p { font-size: 14px; color: var(--text-soft); }
+
+/* Detail header */
+.detail-hd {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  padding: 20px 24px 18px;
+  position: sticky; top: 0; z-index: 10;
+}
+.detail-hd-meta {
+  font-size: 11px; color: var(--gold-light);
+  font-weight: 600; letter-spacing: 0.05em;
+  margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+}
+.detail-hd h2 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 17px; color: var(--white);
+  font-weight: 700; line-height: 1.65;
+}
+
+/* Tabs */
+.detail-tabs {
+  display: flex;
+  background: var(--white);
+  border-bottom: 1.5px solid var(--cream-dark);
+  position: sticky; top: 88px; z-index: 9;
+}
+.dtab {
+  flex: 1; padding: 11px 4px;
+  background: none; border: none;
+  border-bottom: 2.5px solid transparent;
+  font-size: 11.5px; font-weight: 500;
+  color: var(--text-soft); cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: all 0.18s; white-space: nowrap;
+}
+.dtab:hover { color: var(--navy); }
+.dtab.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 700; }
+
+/* Detail content */
+.detail-body { padding: 22px 24px 28px; }
+
+.sec { margin-bottom: 24px; }
+.sec-label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-soft);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sec-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, var(--border), transparent);
+}
+
+/* Concept pills */
+.concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+.concept {
+  background: var(--navy); color: var(--white);
+  padding: 5px 12px; border-radius: 6px;
+  font-size: 12px; font-weight: 600; line-height: 1.4;
+}
+
+/* Answer blocks */
+.answer-item {
+  background: var(--cream);
+  border-left: 3px solid var(--navy);
+  border-radius: 0 10px 10px 0;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  font-size: 13.5px; line-height: 1.8; color: var(--text);
+}
+
+/* Bible verses */
+.verse {
+  border: 1px solid var(--cream-dark);
+  border-radius: 10px;
+  padding: 13px 16px;
+  margin-bottom: 9px;
+  background: var(--cream);
+}
+.verse-ref {
+  font-size: 11px; font-weight: 700;
+  color: var(--gold); margin-bottom: 5px;
+  display: flex; align-items: center; gap: 5px;
+}
+.verse-text {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 13.5px; line-height: 1.75; color: var(--text);
+}
+
+/* Age grid */
+.age-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
+}
+@media (max-width: 600px) { .age-grid { grid-template-columns: 1fr; } }
+.age-box {
+  border-radius: 10px; padding: 13px;
+  font-size: 13px; line-height: 1.7;
+}
+.age-lbl {
+  font-size: 11px; font-weight: 700;
+  margin-bottom: 7px; display: block;
+}
+.age-elem  { background: #fffce8; border: 1px solid #f0d060; }
+.age-elem .age-lbl  { color: #8a6800; }
+.age-youth { background: #f0f4ff; border: 1px solid #b0c4f0; }
+.age-youth .age-lbl { color: #2040a0; }
+.age-adult { background: var(--teal-light); border: 1px solid #a0cfc4; }
+.age-adult .age-lbl { color: var(--teal); }
+
+/* Followup */
+.followup {
+  background: var(--red-light);
+  border-left: 3px solid var(--red);
+  border-radius: 0 10px 10px 0;
+  padding: 13px 15px;
+  margin-bottom: 9px;
+}
+.followup-q { font-size: 13px; font-weight: 700; color: var(--red); margin-bottom: 6px; }
+.followup-a { font-size: 13px; line-height: 1.7; color: var(--text); }
+
+/* Teacher tip */
+.tip-box {
+  background: var(--gold-pale);
+  border: 1.5px solid var(--gold);
+  border-radius: 10px; padding: 14px 16px;
+  margin-top: 6px;
+}
+.tip-lbl { font-size: 11px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+.tip-text { font-size: 13.5px; line-height: 1.75; color: var(--text); }
+
+/* Warning box */
+.warn-box {
+  background: #fff0f0; border: 2px solid #d00;
+  border-radius: 10px; padding: 13px 16px; margin-bottom: 12px;
+}
+.warn-lbl { font-size: 12px; font-weight: 700; color: #c00; margin-bottom: 5px; }
+.warn-text { font-size: 13px; line-height: 1.7; color: var(--text); }
+
+/* Empty / no results */
+.no-results {
+  text-align: center; padding: 48px 20px;
+  color: var(--text-soft); font-size: 14px;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.q-card { animation: fadeInUp 0.25s ease both; }
+
+/* Print */
+@media print {
+  .site-header, .cat-nav, .q-panel { display: none; }
+  .app-layout { grid-template-columns: 1fr; }
+  .detail-panel { position: static; max-height: none; box-shadow: none; border: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-top">
+    <a class="brand" href="#">
+      <div class="brand-cross">✝</div>
+      <div class="brand-text">
+        <h1>신앙 질문 교사 가이드</h1>
+        <p>개혁주의 변증 핸드북 · 주일학교 교사 &amp; 부모님용</p>
+      </div>
+    </a>
+    <div class="header-search">
+      <span class="search-ico">🔍</span>
+      <input type="text" id="searchInput" placeholder="질문 검색...">
+    </div>
+    <div class="header-actions">
+      <button class="btn-pill" id="favBtn" onclick="toggleFavMode()">⭐ 즐겨찾기</button>
+    </div>
+  </div>
+  <nav class="cat-nav">
+    <div class="cat-nav-inner" id="catNav"></div>
+  </nav>
+</header>
+
+<!-- MAIN -->
+<main class="app-layout">
+  <section class="q-panel">
+    <div class="q-meta">
+      <span id="qCount"></span>
+    </div>
+    <div class="q-list" id="qList"></div>
+  </section>
+
+  <aside class="detail-panel" id="detailPanel">
+    <div class="detail-empty">
+      <div class="big-cross">✝</div>
+      <p>왼쪽에서 질문을 선택하세요</p>
+    </div>
+  </aside>
+</main>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+const CATS = [
+  { id:'all',      label:'전체',           cls:'' },
+  { id:'creation', label:'🌿 창조·과학',   cls:'tag-creation' },
+  { id:'salvation',label:'✝️ 구원·구속',   cls:'tag-salvation' },
+  { id:'god',      label:'☀️ 하나님의 본성',cls:'tag-god' },
+  { id:'bible',    label:'📖 성경·계시',   cls:'tag-bible' },
+  { id:'suffering',label:'💔 고통·악',     cls:'tag-suffering' },
+  { id:'church',   label:'⛪ 교회·신앙생활',cls:'tag-church' },
+  { id:'religion', label:'🌏 타종교·문화', cls:'tag-religion' },
+];
+
+const QS = [
+  /* ── 창조·과학 ── */
+  { id:1, cat:'creation', q:'예수님 탄생 이전 한국인들은 구원받을 수 없었나요?',
+    concepts:['일반계시','언약신학','하나님의 주권'],
+    answers:['개혁주의 신학은 구원이 그리스도의 십자가에 근거하되, 그 효력은 시간을 초월해 소급 적용된다고 가르칩니다. 구약의 성도들도 "오실 메시아"를 믿음으로 구원받았습니다(히 11장).','하나님은 자연과 양심을 통해 모든 사람에게 자신을 드러내셨습니다(롬 1:19-20, 2:14-15). 이 일반계시를 통한 하나님의 공의로운 심판을 개혁주의는 인정합니다.','칼뱅은 하나님의 선택이 지리적·민족적 경계를 초월한다고 강조했습니다. 구원의 범위는 하나님의 주권에 속하며 인간이 임의로 제한할 수 없습니다.'],
+    verses:[{ref:'히브리서 11:13', text:'이 사람들은 다 믿음을 따라 죽었으며 약속을 받지 못하였으되...'},{ref:'로마서 2:14-15', text:'율법 없는 이방인이 본성으로 율법의 일을 행할 때에는 이 사람은 율법이 없어도 자기가 자기에게 율법이 되나니.'},{ref:'사도행전 17:26-27', text:'인류의 모든 족속을 한 혈통으로 만드사... 혹 하나님을 더듬어 찾아 발견하게 하려 하심이라.'}],
+    ages:{ elem:'하나님은 아주 공평하신 분이에요. 예수님 이야기를 못 들은 사람들에게도 하늘과 땅, 마음속 양심을 통해 "나 여기 있어"라고 말씀하셨어요.', youth:'예수님은 시간을 초월해 일하세요. 구약 사람들도 "오실 예수님"을 바라보며 구원받았고, 하나님은 모든 사람의 반응을 공의롭게 판단하세요.', adult:'언약신학은 구원이 그리스도의 사역에 근거하되 소급 적용됨을 가르칩니다. 롬 1-2장의 일반계시는 모든 인류에게 주어졌으며, 구원의 범위는 하나님의 주권에 속합니다.' },
+    followups:[{q:'그럼 선교가 필요 없지 않나요?', a:'일반계시는 하나님의 존재를 알게 하지만, 복음의 충만함으로 나아가게 하기 위해 선교는 여전히 필수입니다.'},{q:'지금 오지에 사는 사람들도 마찬가지인가요?', a:'같은 원리가 적용됩니다. 하나님은 공의로우시므로 알 기회 없이 정죄하지 않으십니다.'}],
+    tip:'이 질문은 하나님의 공의와 사랑을 동시에 다루는 아름다운 질문입니다. "불공평하지 않나요?"라는 의문을 환영하고, 하나님은 우리보다 훨씬 더 공평하신 분임을 따뜻하게 보여주세요.' },
+
+  { id:2, cat:'creation', q:'진화론이 맞다면 창세기는 다 신화 아닌가요?',
+    concepts:['장르 해석학','계시의 적응','유신론적 진화론'],
+    answers:['창세기는 "누가, 왜 창조했는가"를 답하는 신학 문서입니다. "어떻게, 얼마나 오래"라는 과학적 질문과는 다른 차원의 답을 줍니다.','칼뱅의 "적응(Accommodation)" 원리: 하나님은 당시 사람들의 언어와 인식 수준에 맞게 계시하셨습니다. 이는 오류가 아니라 소통 방식입니다.','날-시대 이론, 유신론적 진화론 등 다양한 해석이 있으나, 핵심은 "하나님이 창조주"라는 사실입니다. 진화론 자체가 하나님의 창조 방식일 수 있습니다.','칼람 우주론적 논증: 빅뱅 이론이 오히려 우주의 시작(창조)을 지지합니다. "무에서 유"가 생겼다면 그 원인은 무엇인가요?'],
+    verses:[{ref:'창세기 1:1', text:'태초에 하나님이 천지를 창조하시니라.'},{ref:'요한복음 1:3', text:'만물이 그로 말미암아 지은 바 되었으니 지은 것이 하나도 그가 없이는 된 것이 없느니라.'},{ref:'히브리서 11:3', text:'믿음으로 모든 세계가 하나님의 말씀으로 지어진 줄을 우리가 아나니.'}],
+    ages:{ elem:'성경은 "하나님이 모든 것을 만드셨어"라고 알려주고, 과학은 "어떻게 만들어졌을까"를 연구해요. 둘이 싸울 필요가 없어요!', youth:'창세기가 과학책이면 이상한 게 맞아요. 하지만 창세기는 신학책이에요. "하나님이 왜, 누가 창조했는가"를 답하는 거죠. 위대한 과학자들도 많은 분이 신앙인이었어요.', adult:'성경의 무오성은 원래 목적(신앙과 삶)의 영역에 적용됩니다. 창세기의 장르는 고대 근동 신학적 산문이며, 과학적 서술과 동일시해서는 안 됩니다.' },
+    followups:[{q:'그럼 아담과 하와는 실제 인물인가요?', a:'개혁주의 내에서도 역사적 아담론과 문학적 해석이 공존합니다. 중요한 것은 인류의 타락과 죄의 현실입니다.'},{q:'6일 창조를 믿으면 바보 아닌가요?', a:'문자적 6일 창조를 믿는 신학자와 과학자들도 있습니다. 신앙의 핵심은 "어떻게"가 아닌 "누가"에 있습니다.'}],
+    tip:'진화론과 창조론을 대립시키지 말고, "두 질문이 서로 다르다"는 점에서 시작하세요. "진화론이 맞으면 하나님이 없다"는 논리는 성립하지 않습니다.' },
+
+  { id:3, cat:'creation', q:'성경이 과학적으로 맞지 않는 것 같은데, 믿을 수 있나요?',
+    concepts:['성경 무오성','현상학적 언어','범주 구분'],
+    answers:['성경은 과학 교과서가 아닌 구원의 책입니다. 신앙과 행위의 문제에서 오류가 없다는 것이 개혁주의의 무오성 교리입니다.','여호수아의 "태양이 멈췄다"는 표현은 관찰자 시점의 현상학적 언어입니다. 오늘날 NASA도 공식적으로 "sunrise"라는 표현을 씁니다.','과학도 세계관적 전제 위에 있습니다. "자연주의"라는 철학적 가정 자체가 성경보다 더 확실하다고 볼 수 없습니다.'],
+    verses:[{ref:'디모데후서 3:16', text:'모든 성경은 하나님의 감동으로 된 것으로 교훈과 책망과 바르게 함과 의로 교육하기에 유익하니.'},{ref:'시편 19:1', text:'하늘이 하나님의 영광을 선포하고 궁창이 그의 손으로 하신 일을 나타내는도다.'}],
+    ages:{ elem:'성경은 하나님이 누구신지, 우리를 얼마나 사랑하시는지 알려주는 책이에요. 과학 숙제 답지가 아니에요!', youth:'성경과 과학은 서로 다른 질문에 답해요. 충돌처럼 보이는 것들은 대부분 장르를 이해하면 해소돼요. 뉴턴, 파스칼, 콜린스 같은 위대한 과학자들도 신앙인이었어요.', adult:'웨스트민스터 신앙고백 1장의 무오성 교리는 성경의 원래 목적(신앙과 행위) 안에서 이해됩니다. 과학적 서술과 신학적 서술의 범주를 구분하는 것이 핵심입니다.' },
+    followups:[{q:'그럼 성경에서 틀린 부분이 있다는 건가요?', a:'목적의 범주 안에서는 오류가 없습니다. 다만 과학 교과서로 읽는 것은 잘못된 독법입니다.'}],
+    tip:'학생들이 학교에서 배운 것과 교회 가르침 사이의 긴장을 느낄 때 이 질문을 합니다. "과학이 틀렸어"가 아닌 "다른 질문을 다룬다"는 접근이 훨씬 설득력 있습니다.' },
+
+  { id:4, cat:'creation', q:'노아의 홍수가 전 지구적으로 일어났다는 게 가능한가요?',
+    concepts:['지역적 홍수설','고대 근동 문학','역사-신학적 해석'],
+    answers:['"온 땅"은 당시 저자의 세계관 내에서 메소포타미아 지역을 의미했을 수 있습니다. 고대 히브리어 "에레츠"는 "땅/지역" 모두로 번역 가능합니다.','길가메시 서사시 등 고대 근동 홍수 설화들과의 유사성은 실제 대홍수 사건에 대한 집단 기억의 반영일 수 있습니다.','예수님이 노아의 홍수를 역사적 사실로 언급하셨습니다(마 24:37-39). 이는 성경 전체의 권위와 연결된 문제입니다.'],
+    verses:[{ref:'창세기 7:11', text:'노아가 육백 세 되던 해 이월 곧 그 달 십칠일이라 그 날에 큰 깊음의 샘들이 터지며...'},{ref:'마태복음 24:37-38', text:'노아의 때와 같이 인자의 임함도 그러하리라.'}],
+    ages:{ elem:'노아 이야기는 하나님이 죄를 미워하시고, 믿음으로 순종하는 사람을 구원하신다는 걸 보여줘요.', youth:'지구 전체냐, 지역이냐 논쟁이 있어요. 하지만 더 중요한 건 메시지예요. 하나님의 심판과 구원의 은혜를 보여주는 사건이에요.', adult:'홍수의 범위(전 지구적 vs 지역적)는 신학적으로 열린 문제입니다. 그러나 예수님의 역사적 언급은 성경 권위 전체의 문제로 연결됩니다.' },
+    followups:[{q:'방주에 모든 동물을 다 실을 수 있나요?', a:'방주 크기는 약 1만 5천 톤급 선박에 해당합니다. "종류"를 현대 종 개념과 동일시하지 않으면 문제가 해소됩니다.'}],
+    tip:'"이게 가능해요?"라는 질문 뒤에는 성경 전체에 대한 신뢰 문제가 있습니다. 세부 사항보다 신학적 핵심 메시지에 집중하도록 대화를 이끄세요.' },
+
+  { id:5, cat:'creation', q:'인간이 원숭이에서 진화했다면 우리에게 영혼이 있나요?',
+    concepts:['영혼론','하나님의 형상','인간의 독특성'],
+    answers:['성경은 인간이 다른 피조물과 구별되게 "하나님의 형상(Imago Dei)"으로 창조되었다고 선언합니다(창 1:26-27). 이 형상은 육체적 형태가 아닌 인격성, 도덕성, 영성입니다.','유신론적 진화론 입장에서도, 하나님이 진화 과정을 통해 몸을 만드시고 특별히 영혼을 부여하셨다는 이해가 가능합니다.','인간의 독특성: 언어, 예술, 도덕, 종교, 자아 인식은 다른 동물에게 없는 특성입니다. 이는 진화론만으로 설명하기 어렵습니다.','반틸의 관점: 인간이 단순한 진화의 산물이라면 인간의 이성과 도덕 판단이 신뢰할 수 없게 됩니다. 이것이 자기모순입니다.'],
+    verses:[{ref:'창세기 1:26-27', text:'하나님이 이르시되 우리의 형상을 따라 우리의 모양대로 우리가 사람을 만들고...'},{ref:'창세기 2:7', text:'여호와 하나님이 땅의 흙으로 사람을 지으시고 생기를 그 코에 불어넣으시니 사람이 생령이 되니라.'}],
+    ages:{ elem:'하나님이 우리를 특별하게 만드셨어요. 동물과 달리 하나님과 이야기할 수 있고, 옳고 그름을 알 수 있어요. 이게 바로 하나님의 형상이에요.', youth:'진화론이 맞다고 해도, 하나님이 우리에게 특별히 영혼을 주셨다고 볼 수 있어요. 인간만이 예술을 하고, 도덕을 생각하고, 하나님을 찾아요. 이건 설명이 필요한 독특함이에요.', adult:'하나님의 형상(Imago Dei)은 기능적(지식, 의, 거룩함)으로 이해됩니다. 영혼의 기원에 대해서는 영혼 선재설, 유전설, 창조설이 있으며, 개혁주의는 전통적으로 영혼 창조설을 지지합니다.' },
+    followups:[{q:'동물도 영혼이 있나요?', a:'성경은 동물이 "생령(nephesh)"을 가진다고 하지만, 하나님의 형상과 불멸의 영혼은 인간에게만 귀속됩니다.'}],
+    tip:'"우리가 원숭이랑 같아요?"라는 질문에 담긴 존엄성에 대한 갈망을 포착하세요. 인간의 독특성과 하나님의 형상을 긍정적으로 보여주세요.' },
+
+  /* ── 구원·구속 ── */
+  { id:6, cat:'salvation', q:'착하게 살면 구원받지 않나요? 꼭 예수님을 믿어야 하나요?',
+    concepts:['칭의','전적 타락','오직 믿음 Sola Fide'],
+    answers:['"오직 믿음(Sola Fide)": 구원은 행위가 아닌 믿음으로만 옵니다. 이것은 종교개혁의 핵심 통찰입니다.','하나님의 완전한 기준에 도달하는 인간은 없습니다(롬 3:23). 자신의 선함이 충분하다는 생각 자체가 교만입니다.','구원은 거래(행위 → 보상)가 아닌 관계의 회복입니다. 하나님과의 단절이 핵심 문제이며, 그 회복은 오직 그리스도의 화목 사역을 통해서입니다.','착한 삶은 구원의 조건이 아닌 구원받은 자의 열매입니다. 순서가 중요합니다.'],
+    verses:[{ref:'에베소서 2:8-9', text:'너희는 그 은혜에 의하여 믿음으로 말미암아 구원을 받았으니... 행위에서 난 것이 아니니 이는 누구든지 자랑하지 못하게 함이라.'},{ref:'로마서 3:23', text:'모든 사람이 죄를 범하였으매 하나님의 영광에 이르지 못하더니.'},{ref:'갈라디아서 2:16', text:'사람이 의롭게 되는 것은 율법의 행위로 말미암음이 아니요 오직 예수 그리스도를 믿음으로 말미암는 줄.'}],
+    ages:{ elem:'하나님이 "완전히 착하면 천국 와"라고 하셨는데, 아무도 완벽할 수 없어요. 그래서 예수님이 대신 우리 죗값을 내주신 거예요. 이게 바로 사랑이에요!', youth:'착하게 사는 것과 구원은 달라요. 구원은 벌어서 받는 상이 아니라 하나님이 주시는 선물이에요. 착한 삶은 그 선물에 대한 감사의 표현이에요.', adult:'개혁주의 칭의론은 그리스도의 능동적 순종의 전가를 통한 법정적 선언을 강조합니다. Sola Fide는 행위를 구원의 근거가 아닌 열매로 재정립합니다.' },
+    followups:[{q:'그럼 나쁜 짓 해도 믿기만 하면 되나요?', a:'진정한 믿음은 삶의 변화를 동반합니다. 야고보서 2장: "행함이 없는 믿음은 죽은 것"입니다.'},{q:'착한 무신론자가 나쁜 기독교인보다 낫지 않나요?', a:'그 착함의 기준이 어디서 왔는지 생각해보세요. 구원은 도덕적 수준이 아닌 하나님과의 관계 문제입니다.'}],
+    tip:'"나는 착하게 사는데 왜 교회까지 다녀야 해?"라는 저항이 담겨 있습니다. 착하게 살려는 노력을 존중하면서, 구원의 본질이 "관계의 회복"임을 따뜻하게 설명하세요.' },
+
+  { id:7, cat:'salvation', q:'한 번 구원받으면 영원히 구원받은 건가요?',
+    concepts:['성도의 견인','은혜 언약','성령의 인치심'],
+    answers:['개혁주의는 "성도의 견인(Perseverance of the Saints)"을 고백합니다. 참된 구원은 하나님의 보존하심으로 끝까지 유지됩니다.','구원은 인간의 의지력이 아닌 하나님의 신실하심에 근거합니다. 하나님이 시작하신 일은 반드시 완성하십니다(빌 1:6).','그러나 이것은 방종의 허가가 아닙니다. 참된 신자는 거룩함을 추구하며, 삶의 열매로 구원의 확신을 얻습니다.'],
+    verses:[{ref:'요한복음 10:28-29', text:'내가 그들에게 영생을 주노니 영원히 멸망하지 아니할 것이요 또 그들을 내 손에서 빼앗을 자가 없느니라.'},{ref:'빌립보서 1:6', text:'너희 안에서 착한 일을 시작하신 이가 그리스도 예수의 날까지 이루실 줄을 우리는 확신하노라.'}],
+    ages:{ elem:'하나님은 한 번 우리 손 잡으시면 절대 놓지 않으세요. 우리가 실수해도 하나님이 붙들고 계세요.', youth:'구원은 내가 붙드는 게 아니라 하나님이 붙드시는 거예요. 그래서 확실한 거예요. 하지만 그게 "아무렇게나 살아도 돼"가 아니에요.', adult:'성도의 견인 교리는 하나님의 선택의 불변성, 그리스도의 중보, 성령의 내주에 근거합니다. 웨스트민스터 신앙고백 17장을 참조하세요.' },
+    followups:[{q:'스스로 구원을 포기할 수도 있지 않나요?', a:'개혁주의는 참된 신자는 궁극적으로 떠나지 않는다고 봅니다. 완전히 떠났다면 처음부터 참된 구원이 아니었을 수 있습니다(요일 2:19).'}],
+    tip:'이 질문은 종종 죄책감이나 불안에서 옵니다. 확신을 주되, 방종을 허용하지 않는 균형을 유지하세요.' },
+
+  { id:8, cat:'salvation', q:'죽기 직전에 회개해도 구원받을 수 있나요?',
+    concepts:['은혜의 충분성','하나님의 주권','십자가의 도적'],
+    answers:['십자가의 강도(눅 23:43): 예수님은 마지막 순간 회개한 죄인에게 "오늘 네가 나와 함께 낙원에 있으리라"고 약속하셨습니다.','구원은 공로가 아닌 은혜입니다. "불공평하다"는 느낌은 인간의 공로 체계로 구원을 이해하기 때문입니다.','그러나 마지막 순간을 계산하는 것은 매우 위험합니다. 회개를 미루다 기회를 놓칠 수 있고, 회개 자체를 진심으로 할 수 없게 됩니다.'],
+    verses:[{ref:'누가복음 23:43', text:'예수께서 이르시되 내가 진실로 네게 이르노니 오늘 네가 나와 함께 낙원에 있으리라.'},{ref:'요한복음 3:16', text:'하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니 이는 그를 믿는 자마다 멸망하지 않고 영생을 얻게 하려 하심이라.'}],
+    ages:{ elem:'십자가 옆 나쁜 사람도 마지막에 예수님을 믿었을 때 "오늘 나랑 같이 있을 거야"라고 하셨어요. 하나님의 용서는 끝이 없어요.', youth:'늦은 회개도 구원받을 수 있어요. 하지만 "나중에 하면 되겠지"는 위험한 생각이에요. 회개할 기회가 남아있다는 보장이 없고, 나중에 진심으로 회개하기 어려워지기도 해요.', adult:'구원의 충분성은 하나님의 은혜의 넉넉함에서 나옵니다. 그러나 이것이 죄를 방임하는 근거가 될 수 없습니다. 히브리서 3:15: "오늘 너희가 그의 음성을 듣거든 굳게 하지 말라."' },
+    followups:[{q:'착하게 산 사람과 마지막 회개한 나쁜 사람이 같은 천국인가요?', a:'더 중요한 것은 천국이 "상"이 아닌 "하나님과의 관계"라는 점입니다.'}],
+    tip:'이 질문 뒤에는 "나는 아직 결정 안 해도 되겠지"라는 회피가 있을 수 있습니다. 은혜의 충분함을 보여주되, 지금 결단의 중요성도 놓치지 마세요.' },
+
+  { id:9, cat:'salvation', q:'태어날 때부터 정해진 사람만 구원받는다면 노력이 무슨 소용인가요?',
+    concepts:['예정론','책임과 선택의 양립','복음 선포의 이유'],
+    answers:['개혁주의 예정론은 하나님의 주권적 선택을 가르치지만, 동시에 인간의 실제 책임과 선택을 부정하지 않습니다. 이 둘은 성경에서 긴장을 이루며 공존합니다.','예정론은 구원의 확신을 주기 위한 교리입니다. 내 구원이 하나님의 신실하심에 달려있다는 것이 위로입니다.','복음 선포는 왜 해야 하는가? 하나님은 복음 선포라는 방법을 통해 선택받은 자들을 부르십니다. 그래서 선교와 전도는 여전히 필수입니다.'],
+    verses:[{ref:'에베소서 1:4-5', text:'창세 전에 그리스도 안에서 우리를 택하사...'},{ref:'요한복음 6:37', text:'아버지께서 내게 주시는 자는 다 내게로 올 것이요 내게 오는 자는 내가 결코 내쫓지 아니하리라.'},{ref:'베드로후서 1:10', text:'그러므로 형제들아 더욱 힘써 너희 부르심과 택하심을 굳게 하라.'}],
+    ages:{ elem:'하나님이 우리를 먼저 사랑해서 선택하셨어요. 하지만 우리도 예수님을 믿는 선택을 해요. 둘 다 진짜예요!', youth:'예정론은 복잡해 보이지만, 핵심은 "내 구원이 하나님의 신실하심에 달려있다"는 위로예요. "나는 선택받았나요?"라고 고민하는 것 자체가 하나님이 당신을 부르시는 증거일 수 있어요.', adult:'개혁주의 예정론은 하나님의 주권을 강조하지만, 2차 원인으로서의 인간 책임을 무효화하지 않습니다. 웨스트민스터 신앙고백 3장과 10장을 함께 읽으세요.' },
+    followups:[{q:'선택받지 못한 사람들이 있다는 건가요?', a:'이중예정론은 개혁주의 내에서도 다양한 입장이 있습니다. 확실한 것은 하나님이 아무도 멸망하기를 원하지 않으신다는 것(벧후 3:9)입니다.'}],
+    tip:'예정론이 구원의 확신을 위한 위로의 교리임을 강조하세요. "하나님이 붙드신다"는 안정감이 핵심입니다.' },
+
+  { id:10, cat:'salvation', q:'자살하면 지옥 가나요?',
+    concepts:['구원의 확실성','하나님의 자비','정신 건강과 신앙'],
+    warn:'⚠️ 이 질문이 나왔다면 먼저 학생의 현재 상태를 살피세요. 자살예방상담전화: 1393',
+    answers:['이 질문에는 매우 조심스럽게 접근해야 합니다. 자살을 "용서받지 못할 죄"로 분류하는 것은 성경적 근거가 부족합니다.','구원은 마지막 행위가 아닌 그리스도와의 관계에 달려있습니다. 성도의 견인 교리: 하나님이 선택하신 자를 끝까지 보존하십니다.','자살로 생을 마감하는 많은 경우는 극심한 고통과 정신 질환의 결과입니다. 하나님은 그 고통을 이해하십니다.','그러나 이것이 자살을 정당화하거나 격려하는 것은 아닙니다. 생명은 하나님이 주신 선물이며, 어떤 고통도 하나님과 함께 헤쳐나갈 수 있습니다.'],
+    verses:[{ref:'로마서 8:38-39', text:'내가 확신하노니 사망이나 생명이나... 다른 어떤 피조물이라도 우리를 우리 주 그리스도 예수 안에 있는 하나님의 사랑에서 끊을 수 없으리라.'},{ref:'시편 34:18', text:'여호와는 마음이 상한 자에게 가까이 하시고.'}],
+    ages:{ elem:'하나님은 우리가 얼마나 힘들어도 우리를 사랑하세요. 정말 힘들면 꼭 어른에게 말해야 해요.', youth:'이 질문이 나온다면, 지금 네 마음이 정말 힘든 건 아닌지 먼저 물어봐야 해요. 신학적 답보다 지금 너와 함께 있어주는 것이 더 중요해요. 혼자 있지 말고, 믿을 수 있는 어른에게 꼭 말해요.', adult:'신학적 논쟁보다 당사자의 현재 상태를 먼저 파악하세요. 동시에 즉각적인 전문적 도움 연계가 필요할 수 있습니다.' },
+    followups:[{q:'지금 힘든 건 아닌지 먼저 확인하세요.', a:'신학적 답변보다 관계적 돌봄이 먼저입니다. 필요시 전문 상담가와 연결하세요.'}],
+    tip:'⚠️ 반드시 조심스럽게 다루어야 합니다. 학생 본인이 힘든 상황이라면 즉시 전문 도움으로 연결하세요. 자살예방상담전화: 1393' },
+
+  { id:11, cat:'salvation', q:'세례를 받아야 구원받나요?',
+    concepts:['세례의 의미','언약 표징','믿음과 세례의 관계'],
+    answers:['개혁주의는 세례를 구원의 수단이 아닌 언약의 표징(sign and seal)으로 봅니다. 세례가 구원을 일으키는 것이 아니라, 이미 일어난 구원을 상징합니다.','십자가의 강도(눅 23:43)는 세례 없이 구원받았습니다. 구원의 조건은 그리스도에 대한 믿음입니다.','그러나 세례는 중요합니다. 예수님이 명령하셨고(마 28:19), 공동체에 입문하는 공적 고백이며, 은혜 언약의 확인입니다.'],
+    verses:[{ref:'마태복음 28:19', text:'아버지와 아들과 성령의 이름으로 세례를 베풀고.'},{ref:'로마서 6:3-4', text:'무릇 그리스도 예수와 합하여 세례를 받은 우리는 그의 죽으심과 합하여 세례를 받은 줄을 알지 못하느냐.'}],
+    ages:{ elem:'세례는 "나는 예수님을 믿어요"라고 모든 사람 앞에서 말하는 거예요.', youth:'세례가 없으면 구원이 없는 건 아니에요. 하지만 예수님을 진심으로 믿는다면 세례를 받는 것이 자연스러운 순서예요.', adult:'성례론에서 세례는 "표징이자 인"(sign and seal)입니다. 세례 자체가 구원을 부여하는 것이 아닌(baptismal regeneration 거부), 구원의 약속을 확인하고 인치는 것입니다.' },
+    followups:[{q:'유아세례를 받았는데 다시 세례받아야 하나요?', a:'개혁주의는 유아세례를 유효한 세례로 인정합니다. 재세례는 원칙적으로 거부됩니다. 대신 견진(입교)으로 개인 믿음을 확인합니다.'}],
+    tip:'세례에 대한 교파 간 차이가 있으므로 소속 교단의 입장을 먼저 확인하세요.' },
+
+  /* ── 하나님의 본성 ── */
+  { id:12, cat:'god', q:'하나님이 전능하시다면 왜 악과 고통이 존재하나요?',
+    concepts:['신정론','자유의지와 타락','섭리론'],
+    answers:['하나님은 악의 창조자가 아닙니다. 악은 선한 피조물이 하나님을 떠나 선택한 결과입니다(창 3장).','하나님은 악을 허용하시지만 통제하십니다. 요셉의 이야기(창 50:20)처럼, 인간의 악한 의도도 하나님의 선한 계획 안에서 사용됩니다.','궁극적 해답은 십자가입니다. 하나님 자신이 가장 큰 고통을 감당하심으로 고통의 문제에 동참하셨습니다.','진화론적 자연주의는 이 문제를 해결하지 못합니다. 고통이 "나쁘다"는 판단 자체가 도덕적 기준(하나님)을 전제합니다.'],
+    verses:[{ref:'창세기 50:20', text:'당신들은 나를 해하려 하였으나 하나님은 그것을 선으로 바꾸사...'},{ref:'로마서 8:28', text:'하나님을 사랑하는 자들에게는 모든 것이 합력하여 선을 이루느니라.'},{ref:'요한복음 16:33', text:'세상에서는 너희가 환난을 당하나 담대하라 내가 세상을 이기었노라.'}],
+    ages:{ elem:'하나님은 나쁜 것들을 만들지 않으셨어요. 사람들이 하나님 말씀을 어겼을 때 나쁜 것들이 들어왔어요. 하지만 하나님은 슬픈 일도 좋게 바꾸실 수 있어요.', youth:'왜 착한 사람이 고통받냐는 질문은 정말 어려워요. 하지만 "고통이 나쁘다"고 느끼는 그 감각 자체가 하나님이 주신 도덕감이에요. 예수님도 고통받으셨어요.', adult:'개혁주의 섭리론은 하나님이 악을 허용하시되 통제하심을 가르칩니다. 반틸: "고통이 악하다는 판단은 하나님의 도덕 질서를 전제한다"는 역설적 변증이 강력합니다.' },
+    followups:[{q:'어린 아이의 죽음도 하나님의 뜻인가요?', a:'타락한 세상의 비극이며 하나님도 함께 슬퍼하십니다. 하지만 하나님은 그 안에서도 일하십니다.'},{q:'하나님이 악을 막을 수 있는데 안 한 건가요?', a:'사랑은 강요하지 않습니다. 자유의지를 허락하신 것은 진정한 관계를 위해서입니다.'}],
+    tip:'이 질문에는 논리적 답변 이전에 공감이 먼저입니다. "나도 이 질문과 씨름했어요"라고 솔직히 시작하세요.' },
+
+  { id:13, cat:'god', q:'왜 하나님은 보이지 않나요? 보여주시면 믿겠어요.',
+    concepts:['하나님의 영성','믿음의 본질','계시의 충분성'],
+    answers:['하나님은 영이시므로 물질적·육체적 눈으로는 볼 수 없습니다. 이는 한계가 아닌 본성입니다.','"보면 믿겠다"의 논리적 문제: 예수님 시대에 기적을 직접 본 사람들도 믿지 않았습니다(요 12:37).','하나님은 이미 충분히 자신을 계시하셨습니다. 자연(일반계시), 성경(특별계시), 예수 그리스도(완전계시)가 그 증거입니다.','반틸: 우리가 논리적으로 생각하고 아름다움을 느끼고 도덕을 판단하는 능력 자체가 하나님의 존재를 전제합니다.'],
+    verses:[{ref:'요한복음 4:24', text:'하나님은 영이시니 예배하는 자가 영과 진리로 예배할지니라.'},{ref:'히브리서 11:1', text:'믿음은 바라는 것들의 실상이요 보이지 않는 것들의 증거니.'},{ref:'요한복음 20:29', text:'보지 못하고 믿는 자들은 복되도다.'}],
+    ages:{ elem:'바람은 안 보이지만 나뭇잎이 흔들리면 알 수 있잖아요. 하나님도 영이셔서 눈에 안 보이지만, 하늘과 땅과 마음속에서 느낄 수 있어요.', youth:'보이는 게 다가 아니에요. 사랑, 정의감, 아름다움도 안 보이지만 실재하잖아요. 예수님을 통해 가장 분명하게 자신을 보여주셨어요.', adult:'하나님의 영성(Spirituality)은 물질적 존재가 아님을 의미합니다. 계시의 충분성 교리: 하나님은 그리스도를 통해 이미 완전하게 자신을 계시하셨습니다.' },
+    followups:[{q:'예수님은 보였잖아요?', a:'바로 그것이 성육신의 위대함입니다! 보이지 않는 하나님이 볼 수 있는 형태로 오셨습니다(요 14:9).'}],
+    tip:'"하나님 보여줘봐요"라는 도전 뒤에는 진짜로 하나님을 만나고 싶은 갈망이 있을 수 있습니다. 방어적으로 반응하지 말고 공감하며 대화를 여세요.' },
+
+  { id:14, cat:'god', q:'하나님이 사랑이라면 왜 지옥이 있나요?',
+    concepts:['하나님의 공의','거룩하심','자유의지와 영원한 선택'],
+    answers:['사랑과 공의는 대립하지 않습니다. 하나님의 사랑은 죄를 외면하는 감상적 친절이 아닌, 거룩함과 공의를 동반한 완전한 사랑입니다.','지옥은 하나님이 만드신 형벌이기 이전에, 하나님 없이 살기를 고집하는 사람들의 영원한 선택의 귀결입니다(C.S. 루이스).','하나님은 아무도 지옥에 가기를 원하지 않으십니다(벧후 3:9). 지옥은 하나님이 원하시는 결과가 아닙니다.','십자가는 하나님의 사랑과 공의가 동시에 나타난 사건입니다.'],
+    verses:[{ref:'베드로후서 3:9', text:'주께서는... 아무도 멸망하지 아니하고 다 회개하기에 이르기를 원하시느니라.'},{ref:'마태복음 25:46', text:'그들은 영벌에, 의인들은 영생에 들어가리라.'}],
+    ages:{ elem:'하나님은 모든 사람이 천국에 오기를 원하세요. 하지만 하나님을 끝까지 거부하는 것도 선택이에요.', youth:'지옥은 하나님이 억지로 보내는 곳이 아니에요. 하나님 없이 살기를 고집한 사람들이 결국 가게 되는 곳이에요. 사랑은 강요할 수 없어요.', adult:'개혁주의는 지옥을 하나님의 공의로운 심판으로 이해합니다. C.S. 루이스: "지옥의 문은 안에서 잠긴다"는 통찰이 유용합니다.' },
+    followups:[{q:'사랑이 많으신 하나님이 어떻게 영원히 고통받게 하나요?', a:'지옥의 본질에 대해 신학자들 사이에도 다양한 견해가 있습니다. 확실한 것은 하나님의 공의로운 심판과 사랑의 초청입니다.'}],
+    tip:'논쟁보다는 하나님의 사랑의 초청에 초점을 맞추고, 지옥이 경고이자 복음 초청의 일부임을 보여주세요.' },
+
+  { id:15, cat:'god', q:'삼위일체가 이해가 안 돼요. 하나님이 하나예요, 셋이에요?',
+    concepts:['삼위일체론','페리코레시스','위격과 본질'],
+    answers:['삼위일체: 한 하나님, 세 위격(성부·성자·성령). 셋이 각각 독립된 신이 아니고, 하나가 세 역할을 하는 것도 아닙니다.','완전한 이해는 불가능합니다. 유한한 인간의 범주로 무한한 하나님을 완전히 이해할 수 없는 것은 당연합니다.','삼위일체는 사랑의 하나님을 이해하는 열쇠입니다. 하나님은 창조 이전부터 삼위 안에서 사랑의 교제를 나누셨습니다(요 17:5).'],
+    verses:[{ref:'마태복음 28:19', text:'아버지와 아들과 성령의 이름으로 세례를 베풀고.'},{ref:'요한복음 17:5', text:'아버지여 창세 전에 내가 아버지와 함께 가졌던 영화로써 지금도 아버지와 함께 나를 영화롭게 하옵소서.'},{ref:'고린도후서 13:13', text:'주 예수 그리스도의 은혜와 하나님의 사랑과 성령의 교통하심이 너희 무리와 함께 있을지어다.'}],
+    ages:{ elem:'물, 얼음, 수증기는 모두 H₂O예요. 완전히 같지는 않지만 비슷하게 생각해봐요. 하나님은 한 분이시지만 세 가지 방식으로 계세요.', youth:'삼위일체는 모순이 아니에요. "하나의 본질, 세 위격"이에요. 이해하기 어려운 건 하나님이 우리보다 크기 때문이에요.', adult:'삼위일체는 성경의 귀납적 증거에서 도출된 교리입니다. 위격(휘포스타시스)과 본질(우시아)의 구분이 핵심입니다.' },
+    followups:[{q:'예수님이 하나님인가요, 하나님의 아들인가요?', a:'둘 다입니다. "아들"은 기원과 관계를 나타내는 표현이지 열등함을 의미하지 않습니다. 요 1:1.'}],
+    tip:'삼위일체는 "설명"보다 "경험"으로 이해됩니다. 기도할 때 성부께 드리고, 예수님 안에서 하나님을 보고, 성령님의 인도를 따르는 실제 신앙의 모습을 보여주세요.' },
+
+  { id:16, cat:'god', q:'하나님이 처음부터 존재했다면, 누가 하나님을 만들었나요?',
+    concepts:['자존성(Aseity)','제1원인','시간과 영원'],
+    answers:['하나님은 피조물이 아닙니다. 하나님은 시간과 공간, 인과율 자체를 창조하셨습니다.','자존성(Aseity): 하나님은 스스로 존재하시며, 그 존재의 이유가 외부에 없습니다. 출 3:14: "나는 스스로 있는 자"','반드시 "처음 원인"이 있어야 합니다. 무한 소급은 해결되지 않습니다. 그것이 하나님입니다.','시간 자체가 창조의 산물입니다. "하나님 이전에 무엇이 있었냐"는 질문은 시간이 없는 상태에서 시간을 전제하는 질문입니다.'],
+    verses:[{ref:'출애굽기 3:14', text:'하나님이 모세에게 이르시되 나는 스스로 있는 자이니라.'},{ref:'시편 90:2', text:'산이 생기기 전, 땅과 세계도 주께서 조성하시기 전 곧 영원부터 영원까지 주는 하나님이시니이다.'}],
+    ages:{ elem:'하나님은 누가 만든 분이 아니에요. 항상 계셨어요. 시작도 없고 끝도 없으세요. 그게 하나님이 하나님인 이유예요!', youth:'만들어진 것에는 만든 것이 있어요. 하지만 하나님은 만들어진 분이 아니에요. 반드시 스스로 있는 첫 번째 존재가 있어야 해요. 그게 하나님이에요.', adult:'우주론적 논증(Kalam): 시작이 있는 모든 것은 원인이 있다. 하나님은 시간을 포함한 모든 피조물의 창조자로서 인과율 밖에 존재하십니다.' },
+    followups:[{q:'그럼 우주가 스스로 있을 수도 있지 않나요?', a:'빅뱅 이론 자체가 우주에 시작이 있음을 보여줍니다. 시작이 있다면 원인이 있습니다.'}],
+    tip:'매우 논리적인 사고를 가진 학생에게서 나오는 질문입니다. 논리적으로 응대하되, 철학의 한계를 넘어 계시로 나아가도록 안내하세요.' },
+
+  /* ── 성경·계시 ── */
+  { id:17, cat:'bible', q:'성경에 모순이 있다고 하던데, 어떻게 믿나요?',
+    concepts:['성경 무오성','사본학','장르 해석'],
+    answers:['개혁주의는 성경의 원본 기록의 무오성을 고백합니다. 현존 사본이 아닌, 원본 기록의 무오성입니다.','대부분의 "모순"은 장르 오독에서 비롯됩니다. 시편의 시적 표현을 과학적 사실 기술로 읽으면 당연히 문제가 생깁니다.','복음서의 차이(막달라 마리아의 수 등): 고대 역사 기술에서 부분적 강조와 생략은 모순이 아닙니다. 오히려 독립적 증언의 신뢰성입니다.','사해 사본 발견: 수천 년간 성경 본문이 놀랍도록 정확하게 보존되었음을 확인했습니다.'],
+    verses:[{ref:'디모데후서 3:16-17', text:'모든 성경은 하나님의 감동으로 된 것으로 교훈과 책망과 바르게 함과 의로 교육하기에 유익하니.'},{ref:'시편 119:160', text:'주의 말씀의 강령은 진리이오니.'}],
+    ages:{ elem:'성경에 어려운 부분이 있어요. 하지만 우리가 다 이해 못 하는 거지, 성경이 틀린 게 아니에요.', youth:'모순처럼 보이는 것들 대부분은 장르를 이해하면 풀려요. 신약은 고대 문헌 중 사본이 5,000개 이상이에요!', adult:'사본학(Textual Criticism)은 역설적으로 성경 본문의 신뢰성을 입증했습니다. 무오성 교리는 원본(autograph)에 적용됩니다.' },
+    followups:[{q:'구체적으로 어떤 모순이 있나요?', a:'구체적인 예를 가져오면 함께 살펴봅시다. 대부분 장르나 문맥을 고려하면 해소됩니다.'}],
+    tip:'구체적인 모순이 제기되면 당황하지 마세요. "좋은 질문이에요, 같이 살펴봅시다"라고 하세요. 모르는 것을 솔직히 인정하면 오히려 신뢰가 높아집니다.' },
+
+  { id:18, cat:'bible', q:'성경은 사람이 쓴 거잖아요. 어떻게 하나님의 말씀인가요?',
+    concepts:['유기적 영감론','이중 저자성','정경 형성'],
+    answers:['개혁주의는 "유기적 영감론"을 지지합니다. 하나님은 저자들의 개성, 문체, 경험을 억압하지 않고 활용하셨습니다.','성경의 다양한 문체(바울의 논리, 요한의 시, 누가의 역사)는 인간 저자의 개성이 보존되었음을 보여줍니다.','성경의 통일성: 1,500년에 걸쳐 40여 명의 저자가 쓴 책이 하나의 구속사적 주제(그리스도)를 향해 일관되게 흐릅니다.'],
+    verses:[{ref:'베드로후서 1:20-21', text:'성령의 감동하심을 받은 사람들이 하나님께 받아 말한 것임이라.'},{ref:'히브리서 1:1', text:'옛적에 선지자들을 통하여 여러 부분과 여러 모양으로 우리 조상들에게 말씀하신 하나님이.'}],
+    ages:{ elem:'하나님이 여러 사람을 사용해서 성경을 쓰셨어요. 쓴 사람은 달라도 내용은 하나님이 주신 거예요.', youth:'40명이 넘는 사람이 1,500년 동안 쓴 책이 하나의 이야기를 해요. 이게 우연일까요?', adult:'이중 저자성(Double Authorship): 인간 저자와 신적 저자가 동시에 존재합니다. 워필드(B.B. Warfield)의 영감론을 참고하세요.' },
+    followups:[{q:'정경에 빠진 책들은요?', a:'외경과 정경의 구분 기준(사도적 기원, 교회의 보편적 수용, 기존 정경과의 일치)에 따라 교회가 분별했습니다.'}],
+    tip:'성경의 통일성(40명, 1,500년, 하나의 주제)이라는 구체적 사실이 강력한 설득력을 가집니다.' },
+
+  { id:19, cat:'bible', q:'구약의 하나님은 폭력적이고 잔인해 보여요. 신약과 같은 분인가요?',
+    concepts:['구속사적 발전','하나님의 거룩함','성경 해석학'],
+    answers:['구약과 신약은 같은 하나님의 점진적 계시입니다. 구약의 심판은 하나님의 거룩함과 죄에 대한 공의로운 반응이며, 이는 신약에도 동일합니다.','구약의 폭력처럼 보이는 사건들은 종종 더 큰 구속사적 목적을 위한 것입니다.','신약의 하나님도 심판을 선언하십니다(요한계시록). 사랑만 강조하고 공의를 무시하는 것은 성경의 하나님을 왜곡합니다.','예수님은 구약을 폐하러 온 것이 아니라 완성하러 오셨습니다(마 5:17). 십자가는 구약의 모든 심판이 예수님께 집중된 사건입니다.'],
+    verses:[{ref:'마태복음 5:17', text:'내가 율법이나 선지자를 폐하러 온 줄로 생각하지 말라 폐하러 온 것이 아니요 완전하게 하려 함이라.'},{ref:'히브리서 13:8', text:'예수 그리스도는 어제나 오늘이나 영원토록 동일하시니라.'}],
+    ages:{ elem:'구약과 신약은 하나의 긴 이야기예요. 예수님이 오심으로 모든 것이 완성돼요. 같은 하나님이세요.', youth:'구약의 심판들이 잔인해 보이는 건 하나님의 거룩하심 때문이에요. 그 모든 심판은 결국 예수님 십자가에서 만나요.', adult:'구속사적 해석학: 구약의 사건들은 그리스도를 향해 흐릅니다. 구약의 심판은 하나님의 거룩성과 죄의 심각성을 드러내며 십자가의 필요성을 예시합니다.' },
+    followups:[{q:'가나안 정복 전쟁은 어떻게 설명하나요?', a:'가나안 족속의 죄악이 오래 참으심의 끝에 달했으며(창 15:16), 이스라엘을 통한 심판은 구속사적 목적을 위한 것입니다.'}],
+    tip:'구약과 신약을 분리하지 말고, 하나의 구속사 안에서 점진적 계시로 이해하도록 안내하세요.' },
+
+  { id:20, cat:'bible', q:'성경에 여성 차별이 있는 것 같아요.',
+    concepts:['성경 해석학','문화적 맥락','창조 질서'],
+    answers:['바울의 여성 침묵 명령은 당시 고린도 교회의 특수한 혼란 상황에 대한 지침이라는 해석과, 창조 질서에 근거한 영구적 원칙이라는 해석이 공존합니다.','성경 전체는 여성을 차별하지 않습니다. 드보라(사사), 에스더, 막달라 마리아(부활의 첫 증인), 브리스길라(교사) 등 여성이 중요한 역할을 합니다.','갈 3:28: "남자나 여자나 다 그리스도 예수 안에서 하나이니라." 하나님 앞에서의 동등성은 분명합니다.'],
+    verses:[{ref:'갈라디아서 3:28', text:'유대인이나 헬라인이나 종이나 자유인이나 남자나 여자나 다 그리스도 예수 안에서 하나이니라.'},{ref:'사사기 4:4', text:'그때에 드보라라 하는 여선지자... 이스라엘의 사사가 되었는데.'}],
+    ages:{ elem:'하나님은 남자 여자 모두를 사랑하세요. 성경에는 하나님을 위해 중요한 일을 한 여성들이 많이 나와요.', youth:'성경이 여성을 차별한다는 건 오해예요. 드보라는 이스라엘의 지도자였고, 막달라 마리아는 부활의 첫 증인이었어요.', adult:'상호주의(Egalitarianism)와 보완주의(Complementarianism) 모두 복음주의 신학 안에 있는 입장입니다.' },
+    followups:[{q:'여성 목사는 성경적으로 옳은가요?', a:'이것은 교파와 신학 전통에 따라 다른 답을 가진 문제입니다. 구원과 핵심 교리가 아닌 교회 질서의 문제로 이해하세요.'}],
+    tip:'이 질문에는 교회에서 여성으로서 소외감을 느낀 경험이 담겨있을 수 있습니다. 그 감정을 먼저 인정하고, 성경이 여성을 얼마나 소중히 여기는지를 보여주세요.' },
+
+  /* ── 고통·악 ── */
+  { id:21, cat:'suffering', q:'기도해도 응답이 없어요. 하나님이 정말 들으시나요?',
+    concepts:['섭리와 기도','응답의 세 가지','관계로서의 기도'],
+    answers:['하나님의 응답은 세 가지입니다: Yes(그래), No(아니야), Wait(기다려). 내가 원하는 답이 없는 것이 무응답이 아닙니다.','기도는 하나님을 변화시키는 것이 아니라 우리를 하나님의 뜻에 맞추는 과정입니다.','예수님도 겟세마네에서 "이 잔을 옮겨 달라"고 기도하셨지만, 아버지의 뜻에 맡기셨습니다.'],
+    verses:[{ref:'마태복음 7:7-8', text:'구하라 그리하면 너희에게 주실 것이요 찾으라 그리하면 찾아낼 것이요.'},{ref:'요한일서 5:14', text:'그의 뜻대로 무엇을 구하면 들으심이라.'},{ref:'마태복음 26:39', text:'나의 원대로 마시옵고 아버지의 원대로 하옵소서.'}],
+    ages:{ elem:'엄마 아빠한테 아이스크림 사달라고 했는데 "안 돼"라고 할 때 있죠? 하나님도 더 좋은 것을 알기 때문에 "나중에" 또는 "다른 것"을 주시기도 해요.', youth:'기도 응답은 Yes, No, Wait 세 가지예요. 예수님도 원하시던 것과 다른 응답을 받으셨어요.', adult:'개혁주의 기도론은 기도를 하나님의 작정을 변경하는 수단이 아닌, 작정의 일부로 이해합니다.' },
+    followups:[{q:'열심히 기도하면 다 이루어진다는 말은 맞나요?', a:'그런 "번영신학"은 성경적이지 않습니다. 기도는 하나님을 우리 뜻대로 움직이는 도구가 아닙니다.'}],
+    tip:'이 질문은 많은 경우 실제 상처와 연결됩니다. 신학적 설명 이전에 그 아픔을 충분히 공감하세요.' },
+
+  { id:22, cat:'suffering', q:'우울증이나 정신질환도 믿음이 없어서인가요?',
+    concepts:['전인적 인간 이해','육체의 연약함','공동체적 돌봄'],
+    answers:['정신질환은 믿음의 문제가 아닙니다. 성경의 많은 인물이 깊은 우울과 절망을 경험했습니다(엘리야, 시편 기자, 예레미야).','뇌의 화학적 불균형은 다리가 부러지는 것과 같은 신체 질환입니다. 믿음이 부족해서가 아닙니다.','치료를 받는 것은 연약함이 아닙니다. 정신과 치료는 하나님이 허락하신 의료의 일부입니다.'],
+    verses:[{ref:'열왕기상 19:4', text:'엘리야가 광야로 들어가... 여호와여 넉넉하오니 지금 내 생명을 거두시옵소서.'},{ref:'시편 34:18', text:'여호와는 마음이 상한 자에게 가까이 하시고.'},{ref:'마태복음 11:28', text:'수고하고 무거운 짐 진 자들아 다 내게로 오라 내가 너희를 쉬게 하리라.'}],
+    ages:{ elem:'몸이 아프면 병원에 가야 하듯, 마음이 아파도 도움을 받아야 해요. 하나님은 아픈 사람을 사랑하세요.', youth:'우울증은 의지력 부족이 아니에요. 엘리야도, 시편 기자도 깊은 우울을 경험했어요. 도움 받는 게 용기 있는 거예요.', adult:'개혁주의 신학의 전인적 인간 이해는 정신질환을 영적 실패로 단순화하는 것을 거부합니다. 의료적 치료와 영적 돌봄은 상호보완적입니다.' },
+    followups:[{q:'기도하면 우울증이 나을 수 있나요?', a:'기도와 영적 돌봄은 분명히 도움이 됩니다. 동시에 전문적 치료도 받아야 합니다.'}],
+    tip:'절대 "믿음이 없어서"라고 말하지 마세요. 공감과 전문적 도움으로의 연결이 가장 중요합니다.' },
+
+  { id:23, cat:'suffering', q:'하나님이 사랑이시라면 왜 코로나 같은 전염병을 허락하시나요?',
+    concepts:['자연악과 도덕악','하나님의 주권','공동체적 응답'],
+    answers:['전염병은 타락한 세상의 일부입니다. 창조 세계도 인류의 타락과 함께 저주 아래 놓였습니다(롬 8:20-22).','C.S. 루이스: "고통은 하나님의 확성기다." 안락함 속에서 외면되던 하나님을 찾게 됩니다.','하나님은 재난 가운데서도 일하십니다. 의료진, 자원봉사자 등을 통해 하나님의 사랑이 나타납니다.'],
+    verses:[{ref:'로마서 8:22', text:'피조물이 다 이제까지 함께 탄식하며 함께 고통을 겪고 있는 것을 우리가 아느니라.'},{ref:'요한복음 11:35', text:'예수께서 눈물을 흘리시더라.'},{ref:'시편 46:1', text:'하나님은 우리의 피난처시요 힘이시니 환난 중에 만날 큰 도움이시라.'}],
+    ages:{ elem:'코로나 때 많이 무서웠죠? 하나님도 아프고 슬픈 사람들을 보시며 슬퍼하세요.', youth:'재난이 하나님이 없다는 증거가 아니에요. 예수님도 죽음 앞에서 눈물을 흘리셨어요.', adult:'자연악(Natural Evil)은 도덕악과 구분되지만 모두 타락의 결과입니다(롬 8:20). 교회의 공동체적 응답은 복음의 증거입니다.' },
+    followups:[{q:'하나님이 전염병을 심판으로 보내시는 건가요?', a:'특정 재난을 특정 집단의 죄에 대한 직접 심판으로 단정하는 것은 성경적이지 않습니다(눅 13:1-5).'}],
+    tip:'코로나로 가족을 잃은 학생이 있을 수 있습니다. 신학적 설명 이전에 그 슬픔을 충분히 인정하고 함께 슬퍼하세요.' },
+
+  { id:24, cat:'suffering', q:'하나님이 있다면 왜 전쟁이 계속되나요?',
+    concepts:['자유의지','인간의 탐욕','종말론적 소망'],
+    answers:['전쟁은 하나님이 원하시는 것이 아닙니다. 인간의 탐욕, 권력욕, 죄성이 전쟁을 만듭니다.','하나님은 전쟁을 막을 수 있으시지만, 인간의 자유의지를 존중하십니다. 강제로 평화를 만드는 것은 하나님이 원하시는 방식이 아닙니다.','성경은 궁극적인 평화를 약속합니다(사 2:4). 전쟁은 이 세상이 임시적이며, 새 창조가 필요함을 보여줍니다.'],
+    verses:[{ref:'이사야 2:4', text:'무리가 그 칼을 쳐서 보습을 만들고 그 창을 쳐서 낫을 만들 것이며 이 나라와 저 나라가 다시는 칼을 들고 서로 치지 아니하며.'},{ref:'요한복음 16:33', text:'세상에서는 너희가 환난을 당하나 담대하라 내가 세상을 이기었노라.'}],
+    ages:{ elem:'전쟁은 사람들이 서로 욕심 때문에 싸우는 거예요. 하나님은 우리가 사랑하기를 원하세요.', youth:'전쟁이 하나님이 없다는 증거가 아니에요. 오히려 인간에게 하나님이 얼마나 필요한지 보여주는 증거예요.', adult:'전쟁은 인간 타락의 극단적 표현입니다. 개혁주의 종말론은 현재의 악이 종말의 새 창조로 극복될 것을 고백합니다.' },
+    followups:[{q:'기독교가 역사에서 전쟁을 많이 일으키지 않았나요?', a:'그 전쟁들은 예수님의 가르침을 따른 것이 아니었습니다. 기독교 이름으로 행해진 악은 기독교 자체의 문제가 아닙니다.'}],
+    tip:'뉴스에서 전쟁을 보며 이 질문을 하는 학생들에게, 하나님의 궁극적 평화의 약속과 현재 우리가 평화를 만드는 사람이 되어야 한다는 점을 함께 보여주세요.' },
+
+  /* ── 교회·신앙생활 ── */
+  { id:25, cat:'church', q:'꼭 교회에 다녀야 하나요? 집에서 혼자 믿으면 안 되나요?',
+    concepts:['교회론','성도의 교제','은혜의 방편'],
+    answers:['구원의 조건은 그리스도에 대한 믿음이지, 교회 출석 자체가 아닙니다. 그러나 성경은 신자들이 공동체를 이루어 살기를 명령합니다.','칼뱅: "하나님을 아버지로 삼으려는 자는 교회를 어머니로 삼아야 한다."','은혜의 방편(말씀, 기도, 성례)은 주로 교회 공동체 안에서 주어집니다. 혼자서는 이 풍성함을 온전히 누리기 어렵습니다.'],
+    verses:[{ref:'히브리서 10:24-25', text:'서로 돌아보아 사랑과 선행을 격려하며 모이기를 폐하는 어떤 사람들의 습관과 같이 하지 말고.'},{ref:'고린도전서 12:12', text:'몸은 하나인데 많은 지체가 있고 몸의 지체가 많으나 한 몸임과 같이.'}],
+    ages:{ elem:'교회는 하나님의 가족이에요. 혼자 있는 것보다 가족이랑 함께하는 게 더 따뜻하고 강해지잖아요.', youth:'구원은 교회 출석으로 받는 게 아니에요. 하지만 혼자 신앙을 지키는 건 정말 어려워요. 우리는 서로가 필요해요.', adult:'교회론은 구원론과 불가분의 관계입니다. 칼뱅의 교회 어머니 개념은 은혜의 방편이 공동체 안에서 주어진다는 신학적 원칙을 반영합니다.' },
+    followups:[{q:'교회가 너무 상처를 줘서 못 다니겠어요.', a:'그 상처는 진짜입니다. 교회의 실패를 인정합니다. 하지만 불완전한 교회가 하나님의 방법입니다. 다른 공동체를 찾는 것도 방법입니다.'}],
+    tip:'"교회에서 상처받았어요"라는 말이 뒤에 숨어있을 수 있습니다. 교회의 이상과 현실의 괴리를 솔직히 인정하세요.' },
+
+  { id:26, cat:'church', q:'기독교인인데 왜 이렇게 위선적인 사람이 많나요?',
+    concepts:['성화의 과정','교회의 불완전성','복음의 능력'],
+    answers:['교회는 완성된 사람들의 모임이 아니라, 변화 중인 죄인들의 공동체입니다.','기독교는 "이미 완벽한 사람들의 모임"이라고 주장한 적이 없습니다. 오히려 "모두가 죄인"이라는 것에서 시작합니다.','위선적인 기독교인의 존재는 기독교가 거짓이라는 증거가 아닙니다. 의사를 사칭한 사람이 있다고 의학이 거짓이 되지 않습니다.'],
+    verses:[{ref:'로마서 7:19', text:'내가 원하는 바 선은 행하지 아니하고 도리어 원하지 아니하는 바 악을 행하는도다.'},{ref:'빌립보서 1:6', text:'너희 안에서 착한 일을 시작하신 이가 그리스도 예수의 날까지 이루실 줄을 우리는 확신하노라.'}],
+    ages:{ elem:'교회 사람들도 실수해요. 우리 모두 하나님을 닮아가는 중이거든요. 그래서 예수님이 필요한 거예요.', youth:'기독교인이 위선적이면 기독교가 가짜라는 논리는 성립하지 않아요. 기독교는 "이미 완벽한 사람들"의 종교가 아니에요.', adult:'성화(Sanctification)는 과정입니다. 기독교인의 위선은 신앙의 반증이 아닙니다. 교회는 세상 속에서 여전히 빛의 공동체로 부름받았습니다.' },
+    followups:[{q:'기독교인이랑 비기독교인이 다를 게 없잖아요?', a:'차이가 없다면 그것은 교회가 복음을 제대로 살지 못한 것입니다. 이것은 교회의 실패이지 복음의 실패가 아닙니다.'}],
+    tip:'이 질문 뒤에는 특정 기독교인에게 상처받은 경험이 있을 수 있습니다. 그 상처를 인정하고 사과하는 것이 먼저입니다.' },
+
+  { id:27, cat:'church', q:'예배가 왜 중요한가요? 꼭 매주 가야 하나요?',
+    concepts:['예배의 본질','안식일 원리','공예배의 필요성'],
+    answers:['예배는 의무가 아닌 창조 목적입니다. 인간은 하나님을 예배하도록 지음받았습니다(사 43:7).','안식일 원리: 하나님은 창조 질서 안에 예배의 리듬을 새겨두셨습니다. 주일은 부활을 기념하는 신약의 안식일입니다.','공예배의 독특함: 개인 기도와 QT로 대체할 수 없는 것이 있습니다. 함께 말씀을 듣고, 성례에 참여하고, 교제하는 것은 공예배에서만 가능합니다.'],
+    verses:[{ref:'시편 122:1', text:'사람이 내게 말하기를 여호와의 집에 올라가자 할 때에 내가 기뻐하였도다.'},{ref:'히브리서 10:25', text:'모이기를 폐하는 어떤 사람들의 습관과 같이 하지 말고 오직 권하여.'}],
+    ages:{ elem:'예배는 하나님이랑 만나는 시간이에요. 친구를 만나면 기쁘듯, 하나님을 만나는 것도 기뻐야 해요.', youth:'예배가 의무처럼 느껴진다면, "나는 왜 예배드리는가"를 다시 생각해보세요. 유튜브로 보는 것과 직접 오는 것은 달라요.', adult:'개혁주의 예배론은 규정 원리(Regulative Principle)를 강조합니다. 공예배는 은혜의 방편(말씀, 성례, 기도)이 집중되는 곳입니다.' },
+    followups:[{q:'온라인 예배도 괜찮은가요?', a:'코로나 기간 온라인 예배는 불가피한 대안이었습니다. 그러나 공동체적 예배의 대체재가 아닌 임시 방편으로 이해해야 합니다.'}],
+    tip:'예배 출석을 의무로만 강조하면 역효과가 납니다. 예배가 왜 기쁨인지 자신의 실제 이야기를 나누세요.' },
+
+  /* ── 타종교·문화 ── */
+  { id:28, cat:'religion', q:'기독교만 맞고 다른 종교는 다 틀렸나요? 너무 독선적 아닌가요?',
+    concepts:['종교 배타주의','진리 주장의 논리','겸손한 확신'],
+    answers:['개혁주의는 예수 그리스도가 유일한 구원의 길(요 14:6)임을 고백합니다.', '"모든 종교가 다 맞다"는 다원주의도 하나의 배타적 주장입니다. 논리적으로 모든 진리 주장은 배타적입니다.','기독교의 배타성은 오만함이 아닌 겸손함에서 나옵니다. "내가 옳아서"가 아니라 "하나님이 그렇게 말씀하셨기 때문"입니다.'],
+    verses:[{ref:'요한복음 14:6', text:'예수께서 이르시되 내가 곧 길이요 진리요 생명이니 나로 말미암지 않고는 아버지께로 올 자가 없느니라.'},{ref:'사도행전 4:12', text:'다른 이로써는 구원을 받을 수 없나니 천하 사람 중에 구원을 받을 만한 다른 이름을 우리에게 주신 일이 없음이라.'}],
+    ages:{ elem:'예수님은 "내가 길이야"라고 말씀하셨어요. 길을 가르쳐 주는 것은 독선이 아니에요.', youth:'"모든 종교가 다 맞다"는 것도 사실 하나의 주장이에요. 진리는 투표로 결정되지 않아요.', adult:'종교 배타주의는 인식론적으로 불가피합니다. 타 종교인에 대한 최종 심판은 하나님의 주권에 맡깁니다.' },
+    followups:[{q:'불교 신자는 다 지옥 가나요?', a:'심판은 하나님께 속합니다. 우리의 역할은 복음을 전하는 것입니다.'},{q:'종교 때문에 전쟁이 많이 났잖아요?', a:'그 전쟁들은 예수님의 가르침을 따른 것이 아니었습니다.'}],
+    tip:'이 질문 뒤에는 "왜 우리 할머니가 지옥에 가야 해?"라는 감정이 있을 수 있습니다. 신학적 논증 이전에 그 감정에 먼저 공감하세요.' },
+
+  { id:29, cat:'religion', q:'불교나 유교에도 좋은 가르침이 많은데, 기독교가 뭐가 더 나은가요?',
+    concepts:['일반은총','특별계시의 독특성','그리스도의 유일성'],
+    answers:['개혁주의는 "일반은총"을 통해 다른 종교에도 하나님의 진리의 조각이 있음을 인정합니다. 불교의 자비, 유교의 인(仁)은 일반계시의 반영입니다.','차이점: 기독교만이 죄의 문제를 해결합니다. 다른 종교들은 인간의 노력(수행, 공덕)으로 구원을 추구하지만, 기독교는 하나님이 내려오심(성육신)으로 구원을 이루십니다.','부활: 기독교만의 독특한 주장입니다. 역사 속에서 죽음을 이기고 부활한 창시자는 예수님뿐입니다.'],
+    verses:[{ref:'사도행전 17:28', text:'우리가 그를 힘입어 살며 기동하며 존재하느니라... 우리가 그의 소생이라.'},{ref:'요한복음 1:14', text:'말씀이 육신이 되어 우리 가운데 거하시매...'}],
+    ages:{ elem:'다른 종교에도 좋은 말들이 있어요. 하지만 예수님만이 우리 잘못을 대신 해결해 주셨어요. 다른 종교는 "이렇게 해봐"라고 하지만, 예수님은 "내가 다 했어"라고 하세요.', youth:'다른 종교들도 좋은 도덕을 가르쳐요. 하지만 죄 문제를 해결하는 방법이 달라요. 그리고 예수님만이 부활하셨어요.', adult:'일반은총의 범위 안에서 다른 종교의 진리 요소를 인정하면서도, 특별계시의 독특성(성육신, 십자가, 부활)은 타 종교에 없는 기독교만의 것입니다.' },
+    followups:[{q:'서로 다른 종교가 결국 같은 신을 말하는 것 아닌가요?', a:'표면적 유사성이 있지만, 하나님의 본성, 죄와 구원의 이해, 예수님의 역할에서 근본적 차이가 있습니다.'}],
+    tip:'다른 종교의 좋은 점을 무조건 부정하지 마세요. 일반은총으로 인정하면서, 기독교만의 독특한 핵심(성육신, 십자가, 부활)으로 나아가세요.' },
+
+  { id:30, cat:'religion', q:'제사를 지내면 안 되나요? 조상을 공경하는 건데.',
+    concepts:['우상숭배의 정의','문화와 복음','한국적 상황'],
+    answers:['조상을 기억하고 공경하는 마음은 자연스럽고 성경적입니다(부모 공경 계명). 문제는 그 방식에 있습니다.','전통적 제사의 신학적 문제: 죽은 자와의 교통 시도, 귀신의 중재를 전제하는 행위는 성경이 금하는 것입니다.','현대적 추도 예배(기독교식 추모 예식)는 조상을 기억하고 하나님께 감사드리는 대안입니다.','문화적 형태와 종교적 내용을 구분해야 합니다.'],
+    verses:[{ref:'출애굽기 20:3', text:'너는 나 외에는 다른 신들을 네게 두지 말라.'},{ref:'출애굽기 20:12', text:'네 부모를 공경하라 그리하면 네 하나님 여호와가 네게 준 땅에서 네 생명이 길리라.'}],
+    ages:{ elem:'할아버지 할머니를 사랑하고 기억하는 것은 좋은 거예요. 하나님도 그걸 원하세요. 다만 귀신한테 절하는 건 하나님이 싫어하세요.', youth:'조상을 공경하는 마음은 아름다워요. 기독교도 부모 공경을 명령해요. 하지만 제사가 귀신에게 음식을 드리는 종교 의식이라면 성경이 금하는 거예요. 추도 예배라는 대안이 있어요.', adult:'문화 명령과 복음 명령의 관계에서 이 문제를 다룰 수 있습니다. 문화적 형태는 수용하되, 종교적 내용(귀신 제사)은 거부하는 분별이 필요합니다.' },
+    followups:[{q:'가족들이 다 제사 지내는데 혼자 안 하면 불효 아닌가요?', a:'진정한 효도는 가족의 영적 복지도 포함합니다. 추도 예배를 제안하고, 평소에 더 깊이 가족을 섬기는 것으로 대안을 보여주세요.'}],
+    tip:'원칙을 분명히 하되, 실제 가족 관계에서의 지혜로운 적용을 함께 생각해주세요.' },
+
+  { id:31, cat:'religion', q:'게임, 영화, 음악 등 세상 문화를 즐기면 안 되나요?',
+    concepts:['문화명령','창조의 선함','세상 속 그리스도인'],
+    answers:['창조는 선합니다(창 1:31). 문화는 하나님이 만드신 창조 세계를 발전시키는 인간의 활동으로, 그 자체가 나쁜 것이 아닙니다.','문화명령(Cultural Mandate): 하나님은 인간에게 창조 세계를 관리하고 발전시키라고 명령하셨습니다.','기준: 이것이 하나님을 영화롭게 하는가? 내 신앙을 약화시키는가? 다른 사람에게 해가 되는가?','분리보다 참여: 빌 4:8의 기준으로 문화를 분별하며 참여하는 것이 도피보다 성숙한 태도입니다.'],
+    verses:[{ref:'창세기 1:31', text:'하나님이 지으신 그 모든 것을 보시니 보시기에 심히 좋았더라.'},{ref:'빌립보서 4:8', text:'무엇에든지 참되며 무엇에든지 정직하며 무엇에든지 정결하며... 이것들을 생각하라.'},{ref:'고린도전서 10:31', text:'그런즉 너희가 먹든지 마시든지 무엇을 하든지 다 하나님의 영광을 위하여 하라.'}],
+    ages:{ elem:'게임이나 음악이 다 나쁜 건 아니에요. 하지만 나쁜 말이나 행동을 가르치는 건 조심해야 해요.', youth:'기독교인이라고 모든 문화를 피할 필요는 없어요. 기준은 "이게 나를 하나님께서 멀어지게 하는가?"예요.', adult:'문화 명령(Cultural Mandate)과 일반은총 신학은 세상 문화에 대한 적극적 참여를 가능하게 합니다. 칼뱅 전통의 "변혁론"은 문화 도피가 아닌 문화 변혁을 지향합니다.' },
+    followups:[{q:'폭력적인 게임이나 선정적인 영화는요?', a:'내용이 하나님이 기뻐하시지 않는 것을 정상화하거나 미화한다면 분별이 필요합니다. 빌 4:8의 기준을 적용하세요.'}],
+    tip:'"기독교인은 세상 것을 즐기면 안 된다"는 이분법은 오히려 청소년들을 신앙에서 멀어지게 할 수 있습니다. 분별력 있는 참여를 가르치세요.' },
+
+  { id:32, cat:'religion', q:'동성애는 죄인가요? 기독교는 너무 차별적 아닌가요?',
+    concepts:['성경의 성 윤리','죄인을 향한 사랑','사랑과 진리의 균형'],
+    answers:['개혁주의는 성경이 동성 행위를 죄로 규정한다고 가르칩니다(롬 1:26-27, 고전 6:9-10). 이는 혐오가 아닌 성경의 가르침에 대한 고백입니다.','그러나 동성애적 성향을 가진 사람에 대한 차별이나 혐오는 복음적이지 않습니다. 모든 인간은 하나님의 형상입니다.','죄와 죄인을 구분해야 합니다. 예수님은 죄인을 사랑하셨지만 죄를 정당화하지 않으셨습니다.','교회는 성적 죄를 다른 죄보다 더 심각하게 다루는 경향이 있습니다. 모든 성적 부도덕(이성 간 포함)에 동일한 기준이 적용되어야 합니다.'],
+    verses:[{ref:'로마서 1:26-27', text:'이 때문에 하나님께서 그들을 부끄러운 욕심에 내버려 두셨으니...'},{ref:'고린도전서 6:11', text:'너희 중에 이와 같은 자들이 있더니 주 예수 그리스도의 이름과 우리 하나님의 성령 안에서 씻음과 거룩함과 의롭다 하심을 받았느니라.'}],
+    ages:{ elem:'하나님은 모든 사람을 사랑하세요. 하나님의 계획은 남자와 여자가 결혼하는 것이에요. 다른 선택을 한 사람도 우리가 사랑해야 해요.', youth:'기독교는 동성애를 죄로 보지만, 동성애자를 혐오하거나 차별하는 것은 다른 문제예요. 예수님은 죄인을 사랑하셨어요. 진리를 말하되 사랑으로 해야 해요.', adult:'이 주제는 성경의 가르침(창조 질서, 신약의 명시적 언급)과 현대 문화의 극심한 갈등 속에 있습니다. 진리와 사랑을 동시에 붙드는 것이 복음적 태도입니다.' },
+    followups:[{q:'동성애자 친구가 있는데 어떻게 해야 하나요?', a:'그 친구를 먼저 사람으로 존중하고 사랑하세요. 관계가 먼저입니다. 진리는 신뢰 관계 안에서 전달됩니다.'}],
+    tip:'이 주제는 매우 민감합니다. 성경의 가르침을 지키되, 혐오나 차별로 표현되지 않도록 주의하세요. 당사자가 있을 경우 특히 조심스럽게 다루어야 합니다.' },
+];
+
+// ─── STATE ─────────────────────────────────────────────────────────────────
+let state = {
+  cat: 'all',
+  search: '',
+  activeId: null,
+  tab: 0,
+  favMode: false,
+  favs: JSON.parse(localStorage.getItem('faithqa_favs') || '[]'),
+};
+
+function saveFavs() { localStorage.setItem('faithqa_favs', JSON.stringify(state.favs)); }
+
+function catOf(id) { return CATS.find(c => c.id === id) || {}; }
+
+function filtered() {
+  let list = QS;
+  if (state.favMode) list = list.filter(q => state.favs.includes(q.id));
+  if (state.cat !== 'all') list = list.filter(q => q.cat === state.cat);
+  if (state.search) {
+    const s = state.search.toLowerCase();
+    list = list.filter(q =>
+      q.q.toLowerCase().includes(s) ||
+      (q.answers||[]).some(a => a.toLowerCase().includes(s))
+    );
+  }
+  return list;
+}
+
+// ─── RENDER CATS ────────────────────────────────────────────────────────────
+function renderCats() {
+  document.getElementById('catNav').innerHTML = CATS.map(c =>
+    `<button class="cat-btn${state.cat===c.id?' active':''}" onclick="setCat('${c.id}')">${c.label}</button>`
+  ).join('');
+}
+function setCat(id) { state.cat = id; renderCats(); renderList(); }
+
+// ─── RENDER LIST ────────────────────────────────────────────────────────────
+function renderList() {
+  const list = filtered();
+  document.getElementById('qCount').textContent = `${list.length}개 질문`;
+  const el = document.getElementById('qList');
+  if (!list.length) {
+    el.innerHTML = '<div class="no-results">해당하는 질문이 없습니다.</div>';
+    return;
+  }
+  el.innerHTML = list.map((q, i) => {
+    const cat = catOf(q.cat);
+    const isFav = state.favs.includes(q.id);
+    return `<div class="q-card${state.activeId===q.id?' active':''}" 
+                 onclick="selectQ(${q.id})"
+                 style="animation-delay:${i*0.03}s">
+      <div class="q-num">${q.id}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-bottom">
+        <span class="q-tag ${cat.cls||''}">${cat.label||''}</span>
+      </div>
+      <button class="q-fav-btn${isFav?' on':''}" onclick="toggleFav(event,${q.id})" title="즐겨찾기">⭐</button>
+    </div>`;
+  }).join('');
+}
+
+function toggleFav(e, id) {
+  e.stopPropagation();
+  if (state.favs.includes(id)) state.favs = state.favs.filter(f=>f!==id);
+  else state.favs.push(id);
+  saveFavs();
+  renderList();
+}
+
+function toggleFavMode() {
+  state.favMode = !state.favMode;
+  document.getElementById('favBtn').classList.toggle('active', state.favMode);
+  renderList();
+}
+
+// ─── RENDER DETAIL ──────────────────────────────────────────────────────────
+const TAB_NAMES = ['개혁주의 답변','성경 구절','연령별 설명','후속 질문'];
+
+function selectQ(id) {
+  state.activeId = id;
+  state.tab = 0;
+  renderList();
+  renderDetail();
+  // mobile: scroll to detail
+  if (window.innerWidth <= 800) {
+    setTimeout(() => document.getElementById('detailPanel').scrollIntoView({behavior:'smooth'}), 50);
+  }
+}
+
+function setTab(i) { state.tab = i; renderDetail(); }
+
+function renderDetail() {
+  const panel = document.getElementById('detailPanel');
+  if (!state.activeId) return;
+  const q = QS.find(x => x.id === state.activeId);
+  if (!q) return;
+  const cat = catOf(q.cat);
+
+  const tabs = TAB_NAMES.map((t,i) =>
+    `<button class="dtab${state.tab===i?' active':''}" onclick="setTab(${i})">${t}</button>`
+  ).join('');
+
+  let body = '';
+  if (state.tab === 0) {
+    const pills = (q.concepts||[]).map(c=>`<span class="concept">${c}</span>`).join('');
+    const answers = (q.answers||[]).map(a=>`<div class="answer-item">${a}</div>`).join('');
+    const warn = q.warn ? `<div class="warn-box"><div class="warn-lbl">⚠️ 주의</div><div class="warn-text">${q.warn}</div></div>` : '';
+    const tip = q.tip ? `<div class="tip-box"><div class="tip-lbl">💡 교사 팁</div><div class="tip-text">${q.tip}</div></div>` : '';
+    body = `
+      ${warn}
+      <div class="sec"><div class="sec-label">핵심 개념</div><div class="concepts">${pills}</div></div>
+      <div class="sec"><div class="sec-label">개혁주의 관점</div>${answers}</div>
+      ${tip ? `<div class="sec">${tip}</div>` : ''}`;
+  } else if (state.tab === 1) {
+    const vv = (q.verses||[]).map(v=>`<div class="verse"><div class="verse-ref">📖 ${v.ref}</div><div class="verse-text">${v.text}</div></div>`).join('');
+    body = `<div class="sec"><div class="sec-label">핵심 성경 구절</div>${vv}</div>`;
+  } else if (state.tab === 2) {
+    const a = q.ages || {};
+    body = `<div class="sec"><div class="sec-label">연령별 설명 방법</div>
+      <div class="age-grid">
+        <div class="age-box age-elem"><span class="age-lbl">🟡 초등부</span>${a.elem||''}</div>
+        <div class="age-box age-youth"><span class="age-lbl">🟠 중고등부</span>${a.youth||''}</div>
+        <div class="age-box age-adult"><span class="age-lbl">🔵 성인/청년</span>${a.adult||''}</div>
+      </div></div>`;
+  } else {
+    const ff = (q.followups||[]).map(f=>`<div class="followup"><div class="followup-q">Q: ${f.q}</div><div class="followup-a">→ ${f.a}</div></div>`).join('');
+    body = `<div class="sec"><div class="sec-label">예상 후속 질문</div>${ff}</div>`;
+  }
+
+  panel.innerHTML = `
+    <div class="detail-hd">
+      <div class="detail-hd-meta">${cat.label||''}</div>
+      <h2>${q.q}</h2>
+    </div>
+    <div class="detail-tabs">${tabs}</div>
+    <div class="detail-body">${body}</div>`;
+}
+
+// ─── SEARCH ────────────────────────────────────────────────────────────────
+document.getElementById('searchInput').addEventListener('input', e => {
+  state.search = e.target.value.trim();
+  renderList();
+});
+
+// ─── INIT ──────────────────────────────────────────────────────────────────
+renderCats();
+renderList();
+</script>
+</body>
+</html>
