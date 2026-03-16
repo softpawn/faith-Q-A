@@ -157,15 +157,17 @@ body {
 
 /* ─── LAYOUT ─── */
 .app-layout {
-  max-width: 1200px; margin: 0 auto;
+  max-width: 860px; margin: 0 auto;
   padding: 20px 16px;
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 20px;
-  align-items: start;
 }
-@media (max-width: 800px) {
-  .app-layout { grid-template-columns: 1fr; }
+.q-panel { display: block; }
+.q-panel.hidden { display: none; }
+.detail-panel { display: none; }
+.detail-panel.visible {
+  display: block;
+  position: static;
+  max-height: none;
+  border-radius: 16px;
 }
 
 /* ─── QUESTION LIST ─── */
@@ -248,8 +250,6 @@ body {
   border-radius: 16px;
   box-shadow: var(--shadow-md);
   overflow: hidden;
-  position: sticky; top: 100px;
-  max-height: calc(100vh - 120px);
   overflow-y: auto;
 }
 .detail-panel::-webkit-scrollbar { width: 4px; }
@@ -271,9 +271,21 @@ body {
 /* Detail header */
 .detail-hd {
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-  padding: 20px 24px 18px;
+  padding: 16px 24px 18px;
   position: sticky; top: 0; z-index: 10;
 }
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  border-radius: 20px; padding: 6px 14px;
+  font-size: 12px; font-weight: 500; cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin-bottom: 10px;
+  transition: background 0.2s;
+}
+.back-btn:hover { background: rgba(255,255,255,0.22); color: var(--white); }
 .detail-hd-meta {
   font-size: 11px; color: var(--gold-light);
   font-weight: 600; letter-spacing: 0.05em;
@@ -452,19 +464,14 @@ body {
 
 <!-- MAIN -->
 <main class="app-layout">
-  <section class="q-panel">
+  <section class="q-panel" id="qPanel">
     <div class="q-meta">
       <span id="qCount"></span>
     </div>
     <div class="q-list" id="qList"></div>
   </section>
 
-  <aside class="detail-panel" id="detailPanel">
-    <div class="detail-empty">
-      <div class="big-cross">✝</div>
-      <p>왼쪽에서 질문을 선택하세요</p>
-    </div>
-  </aside>
+  <div class="detail-panel" id="detailPanel"></div>
 </main>
 
 <script>
@@ -902,12 +909,19 @@ const TAB_NAMES = ['개혁주의 답변','성경 구절','연령별 설명','후
 function selectQ(id) {
   state.activeId = id;
   state.tab = 0;
-  renderList();
   renderDetail();
-  // mobile: scroll to detail
-  if (window.innerWidth <= 800) {
-    setTimeout(() => document.getElementById('detailPanel').scrollIntoView({behavior:'smooth'}), 50);
-  }
+  // Show detail, hide list
+  document.getElementById('qPanel').classList.add('hidden');
+  const dp = document.getElementById('detailPanel');
+  dp.classList.add('visible');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function backToList() {
+  state.activeId = null;
+  document.getElementById('qPanel').classList.remove('hidden');
+  document.getElementById('detailPanel').classList.remove('visible');
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function setTab(i) { state.tab = i; renderDetail(); }
@@ -952,6 +966,7 @@ function renderDetail() {
 
   panel.innerHTML = `
     <div class="detail-hd">
+      <button class="back-btn" onclick="backToList()">← 목록으로</button>
       <div class="detail-hd-meta">${cat.label||''}</div>
       <h2>${q.q}</h2>
     </div>
